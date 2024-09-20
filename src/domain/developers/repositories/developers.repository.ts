@@ -3,22 +3,28 @@
 // **************************************************************************
 
 import { injectable } from 'inversify';
-import { IDeveloper } from '../types'
+import { IDeveloper, IContract } from '../types'
 import { contracts, developers } from './data'
 
 @injectable()
 export class DevelopersRepository {
 
-	async getDevelopers(): Promise<IDeveloper[]>{
+	async getDevelopers(): Promise<IDeveloper[]> {
 		return developers
 	}
 
-	async getDeveloperById(id: string): Promise<IDeveloper>{
+	async getDeveloperById(id: string): Promise<IDeveloper> {
 		return developers.find(d => d.id === id)
 	}
 
-	async getContracts(){
+	async getContracts() {
 		return contracts
+	}
+
+	async getCompletedContractsByDeveloperId(developerId: string): Promise<IContract[]> {
+		return contracts.filter(contract =>
+			contract.developerId === developerId && contract.status === 'completed'
+		);
 	}
 
 }
