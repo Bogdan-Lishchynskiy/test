@@ -12,14 +12,27 @@ describe('Developers API tests examples', () => {
 		expect(result.status).toBe(200)
 		expect(result.body?.length).toBeGreaterThan(0)
 
-		for( const developer of result.body ){
+		for (const developer of result.body) {
 			expect(developer).toHaveProperty('id')
 			expect(developer).toHaveProperty('firstName')
 			expect(developer).toHaveProperty('lastName')
 			expect(developer).toHaveProperty('email')
+			expect(developer).not.toHaveProperty('revenue'); // Ensure revenue is not present
 		}
 
-	})
+		const resultWithoutRevenue = await request.get(`/api/developers?includeRevenue=true`);
+		expect(resultWithoutRevenue.status).toBe(200);
+		expect(resultWithoutRevenue.body?.length).toBeGreaterThan(0);
+
+		for (const developer of resultWithoutRevenue.body) {
+			expect(developer).toHaveProperty('id');
+			expect(developer).toHaveProperty('firstName');
+			expect(developer).toHaveProperty('lastName');
+			expect(developer).toHaveProperty('email');
+			expect(developer).toHaveProperty('revenue');
+		}
+	});
+
 
 	it('should BAT get developer by id (mocked repository used)', async () => {
 

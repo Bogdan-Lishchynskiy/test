@@ -1,24 +1,33 @@
-import { IApiOperationArgsBase } from 'swagger-express-ts/i-api-operation-args.base'
-import { IApiPathArgs } from 'swagger-express-ts/api-path.decorator'
+import { IApiOperationArgsBase, IApiOperationArgsBaseParameters } from 'swagger-express-ts/i-api-operation-args.base';
+import { IApiPathArgs } from 'swagger-express-ts/api-path.decorator';
 
 export const path: IApiPathArgs = {
-	path: "/api/developers",
-	name: "Developers",
-}
+    path: "/api/developers",
+    name: "Developers",
+};
+
+const includeRevenueParam: IApiOperationArgsBaseParameters = {
+    query: {
+        includeRevenue: {
+            description: 'Flag to include revenue information in the response',
+            required: false,
+            type: 'boolean',
+        }
+    }
+};
 
 export const getDevelopers: IApiOperationArgsBase = {
-	summary: "Get full list of developers (used by developers management dashboard and contracts management dashboard)",
-	path: '/',
-	parameters: {
-	},
-	responses: {
-		200: {
-			description: 'Success',
-			type: 'array', model: 'DeveloperDto'
-		},
-	},
-}
-
+    summary: "Get full list of developers (used by developers management dashboard and contracts management dashboard)",
+    path: '/',
+    parameters: includeRevenueParam,
+    responses: {
+        200: {
+            description: 'Success',
+            type: 'array',
+            model: 'DeveloperDto'
+        },
+    },
+};
 export const getDeveloperById: IApiOperationArgsBase = {
 	summary: "Get developer by id (used by contracts management dashboard)",
 	path: '/{id}',
