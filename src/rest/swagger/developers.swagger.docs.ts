@@ -29,15 +29,15 @@ export const getDevelopers: IApiOperationArgsBase = {
     },
 };
 export const getDeveloperById: IApiOperationArgsBase = {
-	summary: "Get developer by id (used by contracts management dashboard)",
-	path: '/{id}',
-	parameters: {
-		path: { id: { required: true, name: 'id', description: 'Developer id' } },
-	},
-	responses: {
-		200: {
-			description: 'Success',
-			model: 'DeveloperDto',
-		},
-	},
+    summary: "Get developer by id (used by contracts management dashboard)",
+    path: '/{id}',
+    parameters: {
+        path: { id: { required: true, name: 'id', description: 'Developer id' } },
+    },
+    responses: {
+        200: {
+            description: 'Success',
+            model: 'DeveloperDto',
+        },
+    },
 }

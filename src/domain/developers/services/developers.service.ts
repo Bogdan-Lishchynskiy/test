@@ -7,7 +7,7 @@ export class DevelopersService {
 
     constructor(
         @inject('DevelopersRepository') private developersRepository: DevelopersRepository,
-    ) {}
+    ) { }
 
     async getDevelopers(): Promise<IDeveloper[]> {
         return this.developersRepository.getDevelopers()
